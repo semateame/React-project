@@ -43,14 +43,16 @@ exports.deleteProducts = (req, res) => {
 
 exports.updateProducts = (req, res) => {
 
-    Product.findByIdAndUpdate(req.params._id,
+    Product.updateOne({ _id: req.params._id }, {
+        $set:
         {
             price: req.body.price,
             country: req.body.country,
             rate: req.body.rate
-        }, { new: true })
-        .then(() => {
-            res.json({ sucess: true })
+        }
+    })
+        .then((result) => {
+            res.json(result)
         })
         .catch(err => res.status(400).send({ sucess: false }))
 

@@ -16,10 +16,14 @@ const productSchema= new Schema({
     rate :{
         type:Number,
         required:true
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 
 })
 
 
 
-module.exports = mongoose.model('money-products',productSchema)
+module.exports = mongoose.model('Product',productSchema)

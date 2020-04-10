@@ -7,8 +7,9 @@ const mongoose = require("mongoose")
 const bodyparser = require('body-parser')
 const logger = require('morgan');
 
-const productRoute = require('../MyApp/routes/api/product')
-
+const productRoute = require('./routes/api/product')
+const userRoute = require('./routes/api/users')
+const authRoute = require('./routes/api/auth')
 
 
 const app = express();
@@ -29,7 +30,8 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(productRoute)
-
+app.use(userRoute)
+app.use(authRoute)
 
 
 // catch 404 and forward to error handler
@@ -62,10 +64,10 @@ app.use(function (err, req, res, next) {
 
 
 // getting config key
-const db = require('../config/keys').mongoURI
+const db = require('./config/keys').mongoURI
 
 // connecting to mongodb 
-mongoose.connect(db,{ useNewUrlParser: true })
+mongoose.connect(db, { useNewUrlParser: true })
   .then(() => {
     console.log('connected to mongodb...!!!');
   })
