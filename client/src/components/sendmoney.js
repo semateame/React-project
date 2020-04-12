@@ -10,9 +10,10 @@ const Sendmoneyform = (props) => {
                     <label>Country</label>
                     <Input type="select" bsSize="md">
                         {
+                            
                             props.posts ? props.posts.map(item => {
                                 return (
-                                    <option key={item.id}>{item.title}</option>
+                                    <option key={item._id}>{item.country}</option>
                                 )
                             }) : null
 

@@ -11,7 +11,7 @@ import countryReducer from './store/reducer/countryReducer';
 
 
 const Rootreducer = combineReducers({
-  getCountry: countryReducer,
+  countryReducer: countryReducer,
  
 })
 

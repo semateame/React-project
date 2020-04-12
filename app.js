@@ -6,6 +6,7 @@ const lessMiddleware = require('less-middleware');
 const mongoose = require("mongoose")
 const bodyparser = require('body-parser')
 const logger = require('morgan');
+const cors = require('cors');
 
 const productRoute = require('./routes/api/product')
 const userRoute = require('./routes/api/users')
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 app.use(productRoute)
 app.use(userRoute)
