@@ -15,7 +15,7 @@ exports.getProducts = (req, res) => {
 
 // posting products 
 exports.postProducts = (req, res) => {
-
+console.log(req.body)
     const newproduct = new Product({
         price: req.body.price,
         country: req.body.country,

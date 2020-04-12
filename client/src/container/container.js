@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Sendmoney from '../components/sendmoney'
-import Addcountry from '../components/addCountry'
+
 import * as actionType from '../store/action/countryAction'
 
 
@@ -11,9 +11,9 @@ class Country extends Component {
         this.props.onFetchPostsAsyn()
 
     }
-    componentDidUpdate() {
-        this.props.onAddCountry()
-    }
+    // componentDidUpdate() {
+    //     this.props.onAddCountry()
+    // }
 
     render() {
         return (
@@ -26,18 +26,15 @@ class Country extends Component {
 }
 
 const mapStateToProps = state => {
-    //this object will be merged to props
     return {
-         posts: state.posts
+         posts: state.countryReducer.posts
     }
 }
 
 const mapDispatchToProps = dispatch => {
-    //this object will be merged to props
     return {
 
         onFetchPostsAsyn: () => dispatch(actionType.fetchPostAsync()),
-        onAddCountry: (item) =>  dispatch(actionType.postCountryAsync(item))
 
     }
 }

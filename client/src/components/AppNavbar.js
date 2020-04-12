@@ -2,6 +2,8 @@ import React, { useState} from 'react';
 import {Route,Link} from 'react-router-dom'
 import Container from '../container/container';
 import AddCountry from '../components/addCountry';
+import Admin from '../components/admin';
+
 
 import {
   Collapse,
@@ -11,11 +13,7 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText
+  
 } from 'reactstrap';
 
 const AppNavbar = (props) => {
@@ -35,38 +33,29 @@ const AppNavbar = (props) => {
             <NavItem>
               <NavLink><Link style={{color:"white"}} to="/sendmoney">Send Money</Link></NavLink>
             </NavItem>
+        
+            <NavItem>
+            <NavLink > <Link style={{color:"white"}} to ="/admin">Admin</Link></NavLink>
+            </NavItem>
+
             <NavItem>
             <NavLink > <Link style={{color:"white"}} to ="/addcountry">Add Country</Link></NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+          
+           
+            
           </Nav>
-          <NavLink href="/components/">Sign Up</NavLink>
-          <NavLink href="/components/">Sign In </NavLink>   
-          <NavLink href="/components/">Log Out </NavLink>      
+          <NavLink > <Link style={{color:"white"}} to ="/component">Sign Up</Link></NavLink>
+          <NavLink > <Link style={{color:"white"}} to ="/component">Sign in</Link></NavLink>
+          <NavLink > <Link style={{color:"white"}} to ="/component">Log out</Link></NavLink>
        </Collapse>
       </Navbar>
 <hr/>
 <Route path='/sendmoney' exact component = {Container}></Route>
 <Route path='/addcountry' exact component = {AddCountry}></Route>
+<Route path='/admin' exact component = {Admin}></Route>
+
+
 
     </div>
   );
