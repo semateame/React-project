@@ -1,2 +1,2 @@
-export const INIT_POSTS = "INIT_POSTS";
+export const GET_COUNTRY = "GET_COUNTRY";
 export const ADD_COUNTRY='ADD_COUNTRY'

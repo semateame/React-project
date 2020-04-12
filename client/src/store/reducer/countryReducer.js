@@ -9,10 +9,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 
 
-    if (action.type === actionTypes.INIT_POSTS) {
+    if (action.type === actionTypes.GET_COUNTRY) {
         return {
             ...state,
-            posts: action.posts
+            posts: action.payload,
         }
     }
 
@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
 
         return {
             ...state,
-            posts: [action.payLoad, ...state.posts]
+            posts: [action.payload, ...state.posts]
         }
     }
     return state;

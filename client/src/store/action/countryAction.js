@@ -2,33 +2,29 @@ import axios from 'axios'
 import * as actionType from './actionTypes'
 
 
-export const initPosts = (posts) => {
-    return { type: actionType.INIT_POSTS, posts: posts }
+export const getCountry = (posts) => {
+    return { type: actionType.GET_COUNTRY, payload: posts }
 }
 export const fetchPostAsync = () => {
     return dispatch => {
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        axios.get('http://localhost:5000/product')
             .then(response => {
-                console.log(response.data)
-                dispatch(initPosts(response.data))
+                dispatch(getCountry(response.data))
             })
     }
 }
 
 
 
-
-
 export const addcountry = (posts) => {
-    return { type: actionType.ADD_COUNTRY, payLoad: posts }
+    return { type: actionType.ADD_COUNTRY, payload: posts }
 }
 
 export const postCountryAsync = (item) => {
+    console.log("ppppppppppppppppp",item)
     return dispatch => {
-        axios.post('https://jsonplaceholder.typicode.com/posts',
-            item)
+        axios.post('http://localhost:5000/products',item)
             .then(response => {
-                console.log(response.data)
                 dispatch(addcountry(response.data))
             })
     }
