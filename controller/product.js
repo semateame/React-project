@@ -1,4 +1,5 @@
 const Product = require('../model/product')
+ //import auth from '../../middleware/auth';
 
 
 // getting proucts 
@@ -14,7 +15,9 @@ exports.getProducts = (req, res) => {
 }
 
 // posting products 
+
 exports.postProducts = (req, res) => {
+
 console.log(req.body)
     const newproduct = new Product({
         price: req.body.price,

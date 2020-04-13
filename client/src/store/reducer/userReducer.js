@@ -3,27 +3,26 @@ import * as actionTypes from '../action/actionTypes'
 
 
 const initialState = {
-    posts: []
+    user:[]
 }
 
 const reducer = (state = initialState, action) => {
 
 
-    if (action.type === actionTypes.GET_COUNTRY) {
+    if (action.type === actionTypes.SIGNUP_USER) {
         return {
             ...state,
-            posts: action.payload,
+            user: [action.payload, ...state.user]
         }
     }
 
-
-    if (action.type === actionTypes.ADD_COUNTRY) {
-
+    if (action.type === actionTypes.SIGNIN_USER) {
         return {
             ...state,
-            posts: [action.payload, ...state.posts]
+            user: [action.payload, ...state.user]
         }
     }
+   
     return state;
 }
 

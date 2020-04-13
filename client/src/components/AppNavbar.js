@@ -3,6 +3,8 @@ import {Route,Link} from 'react-router-dom'
 import Container from '../container/container';
 import AddCountry from '../components/addCountry';
 import Admin from '../components/admin';
+import Signup from '../components/signup'
+import Signin from '../components/signin'
 
 
 import {
@@ -45,8 +47,8 @@ const AppNavbar = (props) => {
            
             
           </Nav>
-          <NavLink > <Link style={{color:"white"}} to ="/component">Sign Up</Link></NavLink>
-          <NavLink > <Link style={{color:"white"}} to ="/component">Sign in</Link></NavLink>
+          <NavLink > <Link style={{color:"white"}} to ="/signup">Sign Up</Link></NavLink>
+          <NavLink > <Link style={{color:"white"}} to ="/signin">Sign in</Link></NavLink>
           <NavLink > <Link style={{color:"white"}} to ="/component">Log out</Link></NavLink>
        </Collapse>
       </Navbar>
@@ -54,6 +56,10 @@ const AppNavbar = (props) => {
 <Route path='/sendmoney' exact component = {Container}></Route>
 <Route path='/addcountry' exact component = {AddCountry}></Route>
 <Route path='/admin' exact component = {Admin}></Route>
+<Route path='/signup' exact component = {Signup}></Route>
+<Route path='/signin' exact component = {Signin}></Route>
+
+
 
 
 
