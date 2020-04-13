@@ -4,12 +4,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const lessMiddleware = require('less-middleware');
 const mongoose = require("mongoose")
-const bodyparser = require('body-parser')
 const logger = require('morgan');
 const cors = require('cors');
+const config = require('config');
 
 const productRoute = require('./routes/api/product')
-const userRoute = require('./routes/api/users')
+const userRoute = require('./routes/api/user')
 const authRoute = require('./routes/api/auth')
 
 
@@ -22,7 +22,6 @@ app.set('view engine', 'ejs');
 
 
 
-app.use(bodyparser.json())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -55,21 +54,11 @@ app.use(function (err, req, res, next) {
 });
 
 
-
-
-
-
-
-
-
-
-
-
 // getting config key
-const db = require('./config/keys').mongoURI
+const db = config.get('mongoURI');
 
 // connecting to mongodb 
-mongoose.connect(db, { useNewUrlParser: true })
+mongoose.connect(db, { useNewUrlParser: true, useCreateIndex :true })
   .then(() => {
     console.log('connected to mongodb...!!!');
   })
@@ -78,10 +67,6 @@ mongoose.connect(db, { useNewUrlParser: true })
   })
 
 // Use routes 
-
-
-
-
 
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`listing on port ${port}`))

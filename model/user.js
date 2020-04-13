@@ -3,10 +3,11 @@ const Schema = mongoose.Schema
 
 
 const userSchema = new Schema({
-    
+
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -15,6 +16,11 @@ const userSchema = new Schema({
     role: {
         type: String,
         required: true
+    },
+
+    register_date: {
+        type: Date,
+        default: Date.now
     },
     banking: {
         items: [
