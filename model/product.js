@@ -20,7 +20,12 @@ const productSchema= new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+
+    register_date: {
+        type: Date,
+        default: Date.now
+    },
 
 })
 

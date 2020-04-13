@@ -7,11 +7,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import countryReducer from './store/reducer/countryReducer';
+import userReducer from './store/reducer/userReducer'
 
 
 
 const Rootreducer = combineReducers({
   countryReducer: countryReducer,
+  userReducer: userReducer
  
 })
 

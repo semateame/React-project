@@ -1,6 +1,9 @@
 const User = require('../model/user');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
+const config = require('config');
+const jwt = require('jsonwebtoken');
 
+//User logn in
 exports.postLogin = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -11,9 +14,10 @@ exports.postLogin = (req, res, next) => {
                 bcrypt.compare(password, user.password)
                     .then(isMatch => {
                         if (isMatch) {
-
-
-                            return res.send({ sucess: true })
+                            const token = jwt.sign({ id: user._id }, 'ysw', {
+                                expiresIn: 3600
+                            });
+                            res.status(200).json({ token });
                         } else {
 
                             res.status(400).send({ sucess: false });
@@ -28,22 +32,28 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
-    res.send({sucess:true})
+    res.send({ sucess: true })
 }
 
 exports.getSignup = (req, res, next) => {
-    res.send({sucess:true})
+    res.send({ sucess: true })
 };
 
+
+//user sign up
+
 exports.postSignup = (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    const confirmPassword = req.body.confirmPassword;
-    const role = req.body.role;
+    const { email, password, role } = req.body;
+
+    //simple validation
+    if (!email || !password || !role) {
+        res.status(400).json({ msg: "All fields are required" })
+    }
+    //Check existing user
     User.findOne({ email: email })
         .then(userDoc => {
             if (userDoc) {
-                return res.send({sucess:true});
+                res.status(400).json({ msg: "User exists" })
             }
             return bcrypt
                 .hash(password, 12)
@@ -54,13 +64,21 @@ exports.postSignup = (req, res, next) => {
                         banking: { items: [] },
                         role: role
                     });
-                    return user.save();
+
+
+
+                    return user.save()
                 })
-                .then(result => {
-                    res.send({sucess:true});
-                });
+                .then(user => {
+                    console.log(user)
+                    const token = jwt.sign({ id: user._id }, 'ysw', {
+                        expiresIn: 3600
+                    });
+                    res.status(200).json(user);
+                })
         })
         .catch(err => {
             console.log(err);
         });
 };
+
