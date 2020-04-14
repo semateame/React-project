@@ -9,11 +9,15 @@ import { Provider } from "react-redux";
 import countryReducer from "./store/reducer/countryReducer";
 import errorReducer from "./store/reducer/errorReducer";
 import authReducer from "./store/reducer/authReducer";
+import commentReducer from "./store/reducer/commentReducer";
+
 
 const Rootreducer = combineReducers({
   countryReducer: countryReducer,
   errorReducer: errorReducer,
   authReducer: authReducer,
+  commentReducer: commentReducer
+
 });
 
 export const store = createStore(Rootreducer, applyMiddleware(thunk));

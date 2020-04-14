@@ -1,12 +1,15 @@
 import React, { useState, Fragment} from 'react';
 import {Route,Link,Router,Switch,Redirect} from 'react-router-dom'
 import Container from '../container/container';
-import AddCountry from '../components/addCountry';
-import Admin from '../components/admin';
-import Signup from '../components/signup'
-import Signin from '../components/signin'
-import Logout from '../components/logout'
+import AddCountry from './addCountry';
+import Admin from './admin';
+import Signup from './signup';
+import Signin from './signin';
+import Logout from './logout';
 import { connect } from "react-redux";
+import addComment from './addComments';
+import viewComment from './viewComment';
+
 
 import {history} from '../helper/history';
 
@@ -29,8 +32,10 @@ const AppNavbar = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   
-  const authLinks = (
-    <Fragment>
+  const authLinks = ()=>{
+
+return (
+    <div>
           <NavItem>
       <NavLink > <Link style={{color:"white"}} to ="/logout">Log out</Link></NavLink>
       <NavItem>
@@ -45,18 +50,25 @@ const AppNavbar = (props) => {
     <NavLink > <Link style={{color:"white"}} to ="/addcountry">Add Country</Link></NavLink>
     </NavItem>
       </NavItem>
-    </Fragment>
-  );
+    </div>
+)};
 
-  const guestLinks = (
-    <Fragment>
+  const guestLinks = ()=>{
+   return ( 
+     <div>
       <NavItem>
       <NavLink > <Link style={{color:"white"}} to ="/signup">Sign Up</Link></NavLink>
       <NavLink > <Link style={{color:"white"}} to ="/signin">Sign in</Link></NavLink>    
+      <NavLink > <Link style={{color:"white"}} to ="/viewcomments"> View Feed Back</Link></NavLink>    
+      <NavLink > <Link style={{color:"white"}} to ="/addComments">Add Feed Back</Link></NavLink>    
+
+
       </NavItem>
-      
-    </Fragment>
-  );
+    
+    </div>
+    
+   )
+  };
 
   const {isAuthenticated}= props.authReducer
 
@@ -68,7 +80,7 @@ const AppNavbar = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
 
-          {isAuthenticated ? authLinks: guestLinks}
+          {isAuthenticated ? authLinks(): guestLinks()}
           
            
             
@@ -87,6 +99,9 @@ const AppNavbar = (props) => {
 <Route path='/signup' exact component = {Signup}></Route>
 <Route path='/signin' exact component = {Signin}></Route>
 <Route path='/logout' exact component = {Logout}></Route>
+<Route path='/addComments' exact component = {addComment}></Route>
+<Route path='/viewComments' exact component = {viewComment}></Route>
+
 
 
     </div>

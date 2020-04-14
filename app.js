@@ -11,6 +11,8 @@ const config = require('config');
 const productRoute = require('./routes/api/product')
 const userRoute = require('./routes/api/user')
 const authRoute = require('./routes/api/auth')
+const commentRoute = require('./routes/api/comments')
+
 
 
 const app = express();
@@ -33,6 +35,8 @@ app.use(cors());
 app.use(productRoute)
 app.use(userRoute)
 app.use(authRoute)
+app.use(commentRoute)
+
 
 
 // catch 404 and forward to error handler
