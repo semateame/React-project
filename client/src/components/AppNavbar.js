@@ -1,10 +1,14 @@
-import React, { useState} from 'react';
-import {Route,Link} from 'react-router-dom'
+import React, { useState, Fragment} from 'react';
+import {Route,Link,Router,Switch,Redirect} from 'react-router-dom'
 import Container from '../container/container';
 import AddCountry from '../components/addCountry';
 import Admin from '../components/admin';
 import Signup from '../components/signup'
 import Signin from '../components/signin'
+import Logout from '../components/logout'
+import { connect } from "react-redux";
+
+import {history} from '../helper/history';
 
 
 import {
@@ -17,6 +21,7 @@ import {
   NavLink,
   
 } from 'reactstrap';
+//import { Router } from 'express';
 
 const AppNavbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +29,36 @@ const AppNavbar = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   
+  const authLinks = (
+    <Fragment>
+          <NavItem>
+      <NavLink > <Link style={{color:"white"}} to ="/logout">Log out</Link></NavLink>
+      <NavItem>
+      <NavLink><Link style={{color:"white"}} to="/sendmoney">Send Money</Link></NavLink>
+    </NavItem>
+
+    <NavItem>
+    <NavLink > <Link style={{color:"white"}} to ="/admin">Admin</Link></NavLink>
+    </NavItem>
+
+    <NavItem>
+    <NavLink > <Link style={{color:"white"}} to ="/addcountry">Add Country</Link></NavLink>
+    </NavItem>
+      </NavItem>
+    </Fragment>
+  );
+
+  const guestLinks = (
+    <Fragment>
+      <NavItem>
+      <NavLink > <Link style={{color:"white"}} to ="/signup">Sign Up</Link></NavLink>
+      <NavLink > <Link style={{color:"white"}} to ="/signin">Sign in</Link></NavLink>    
+      </NavItem>
+      
+    </Fragment>
+  );
+
+  const {isAuthenticated}= props.authReducer
 
   return (
     <div>
@@ -32,39 +67,34 @@ const AppNavbar = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink><Link style={{color:"white"}} to="/sendmoney">Send Money</Link></NavLink>
-            </NavItem>
-        
-            <NavItem>
-            <NavLink > <Link style={{color:"white"}} to ="/admin">Admin</Link></NavLink>
-            </NavItem>
 
-            <NavItem>
-            <NavLink > <Link style={{color:"white"}} to ="/addcountry">Add Country</Link></NavLink>
-            </NavItem>
+          {isAuthenticated ? authLinks: guestLinks}
           
            
             
           </Nav>
-          <NavLink > <Link style={{color:"white"}} to ="/signup">Sign Up</Link></NavLink>
-          <NavLink > <Link style={{color:"white"}} to ="/signin">Sign in</Link></NavLink>
-          <NavLink > <Link style={{color:"white"}} to ="/component">Log out</Link></NavLink>
+         
        </Collapse>
       </Navbar>
 <hr/>
+
+
+
+
 <Route path='/sendmoney' exact component = {Container}></Route>
 <Route path='/addcountry' exact component = {AddCountry}></Route>
 <Route path='/admin' exact component = {Admin}></Route>
 <Route path='/signup' exact component = {Signup}></Route>
 <Route path='/signin' exact component = {Signin}></Route>
-
-
-
+<Route path='/logout' exact component = {Logout}></Route>
 
 
     </div>
   );
 }
 
-export default AppNavbar;
+
+const mapStateToProps = (state) => ({
+  authReducer: state.authReducer
+});
+export default connect(mapStateToProps, null)(AppNavbar);

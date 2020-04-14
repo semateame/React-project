@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { postCountryAsync } from '../store/action/countryAction'
+
+
 class AddForm extends Component {
 
     state = {
@@ -17,7 +18,6 @@ class AddForm extends Component {
             price: this.state.price,
             rate: this.state.rate
         };
-
         this.props.postCountryAsync(item)
     }
 
@@ -28,7 +28,12 @@ class AddForm extends Component {
 
 
         return (
+
+            
             <div>
+
+           
+
                 <div className="container">
                     <label>Country</label><br></br>
                     <input type="text" value={this.state.country}
@@ -42,6 +47,7 @@ class AddForm extends Component {
                         onChange={(event) => this.setState({ rate: event.target.value })} /><br></br>
 
                     <button onClick={this.addPostHandler}>Add Post</button>
+
                 </div>
             </div>
         );

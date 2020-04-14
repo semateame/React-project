@@ -1,6 +1,5 @@
 const Product = require('../model/product')
- //import auth from '../../middleware/auth';
-
+ 
 
 // getting proucts 
 
