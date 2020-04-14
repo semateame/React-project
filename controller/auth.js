@@ -8,6 +8,11 @@ exports.postLogin = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
 
+    //simple validation
+    if (!email || !password ) {
+        res.status(400).json({ msg: "All fields are required" })
+    }
+
     User.findOne({ email: email })
         .then(user => {
             if (user) {
@@ -20,14 +25,14 @@ exports.postLogin = (req, res, next) => {
                             res.status(200).json({ token });
                         } else {
 
-                            res.status(400).send({ sucess: false });
+                            res.status(400).send({ msg: "Password doesn't match" });
                         }
                     });
             } else {
-                res.status(400).send({ sucess: false });
+                res.status(400).send({ msg: "User doesn't exist" } );
             }
         }).catch(err => {
-            console.log(err);
+            res.status(400).send({ msg: err } );
         });
 };
 
@@ -35,9 +40,6 @@ exports.postLogout = (req, res, next) => {
     res.send({ sucess: true })
 }
 
-exports.getSignup = (req, res, next) => {
-    res.send({ sucess: true })
-};
 
 
 //user sign up
@@ -51,9 +53,9 @@ exports.postSignup = (req, res, next) => {
     }
     //Check existing user
     User.findOne({ email: email })
-        .then(userDoc => {
-            if (userDoc) {
-                res.status(400).json({ msg: "User exists" })
+        .then(userExist => {
+            if (userExist) {
+                res.status(400).json({ msg: "User already exists" })
             }
             return bcrypt
                 .hash(password, 12)
@@ -64,21 +66,17 @@ exports.postSignup = (req, res, next) => {
                         banking: { items: [] },
                         role: role
                     });
-
-
-
                     return user.save()
                 })
                 .then(user => {
-                    console.log(user)
                     const token = jwt.sign({ id: user._id }, 'ysw', {
                         expiresIn: 3600
                     });
-                    res.status(200).json(user);
+                    res.status(200).json({token,user : { id : user._id, email : user.email, password:user.password, role:user.role}});
                 })
         })
         .catch(err => {
-            console.log(err);
+            res.status(400).send({ msg: err } );
         });
 };
 
