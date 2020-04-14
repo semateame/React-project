@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import {Alert} from 'reactstrap'
+import {clearError} from '../store/action/errorAction'
 
-import { signinUserAsync } from '../store/action/userAction'
+
+import { signinUserAsync } from '../store/action/authAction'
 
 class Signin extends Component {
 
     state = {
         email: '',
         password: "",
+        msg:null
     }
 
     signinHandler = (e) => {
@@ -20,6 +25,29 @@ class Signin extends Component {
         this.props.signinUserAsync(item)
     }
 
+    static propTypes = {
+        isAuthenticated: PropTypes.bool,
+        error: PropTypes.object.isRequired,
+        signinUserAsync:PropTypes.func.isRequired,
+        clearError: PropTypes.func.isRequired
+      };
+
+      componentDidUpdate(prevProps){
+        const {error, isAuthenticated} = this.props;
+        if(error !== prevProps.error){
+            if(error.id ==="SIGNIN_FAIL"){
+                this.setState({msg: error.msg.msg})
+            } else{
+                this.setState({msg:null})
+            }
+        }
+  
+        // if(isAuthenticated){
+        //  return  <Alert>{"Registered sucessfully"}</Alert>
+       // }
+  
+    }
+
 
     render() {
 
@@ -28,6 +56,8 @@ class Signin extends Component {
 
         return (
             <div>
+            {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert>:null}
+
                 <div className="container">
                     <label>Email</label><br></br>
                     <input type="email" value={this.state.email}
@@ -47,10 +77,11 @@ class Signin extends Component {
 
 
 const mapStateToProps = state => ({
-    user: state.userReducer.user
+    isAuthenticated: state.authReducer.isAuthenticated,
+    error: state.errorReducer
 });
 
 export default connect(
     mapStateToProps,
-    { signinUserAsync }
+    { signinUserAsync,clearError }
 )(Signin);

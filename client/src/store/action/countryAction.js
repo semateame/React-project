@@ -21,7 +21,6 @@ export const addcountry = (posts) => {
 }
 
 export const postCountryAsync = (item) => {
-    console.log("ppppppppppppppppp",item)
     return dispatch => {
         axios.post('http://localhost:5000/products',item)
             .then(response => {

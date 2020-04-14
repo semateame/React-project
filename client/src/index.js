@@ -1,29 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { Provider } from 'react-redux'
-import countryReducer from './store/reducer/countryReducer';
-import userReducer from './store/reducer/userReducer'
-
-
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import countryReducer from "./store/reducer/countryReducer";
+import errorReducer from "./store/reducer/errorReducer";
+import authReducer from "./store/reducer/authReducer";
 
 const Rootreducer = combineReducers({
   countryReducer: countryReducer,
-  userReducer: userReducer
- 
-})
+  errorReducer: errorReducer,
+  authReducer: authReducer,
+});
 
-const store = createStore(Rootreducer, applyMiddleware(thunk))
+export const store = createStore(Rootreducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
