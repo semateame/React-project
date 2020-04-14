@@ -35,7 +35,7 @@ export const signupUserAsync = (newUser) => {
                 dispatch(signupUser(response.data));
                })
                .catch(err=>{
-                dispatch(returnError(err.response.data, err.response.status, 'SIGNUP_FAIL'));
+                dispatch(returnError(err.response.data, err.response.status));
                    dispatch({ type: actionTypes.SIGNUP_FAIL })
                })
     }
@@ -85,3 +85,19 @@ export const tokenConfig = (getState) => {
 
   return config;
 };
+
+
+
+export const commentUser = (userData) => {
+  return { type: actionTypes.USER_COMMENT, payload: userData }
+}
+export const commentUserAsync = (newComment) => {
+  return dispatch => {
+
+      axios.post('http://localhost:5000/comments', newComment)
+          .then(response => {
+              dispatch(commentUser(response.data));
+             })
+           
+  }
+}
