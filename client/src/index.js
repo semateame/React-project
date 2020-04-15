@@ -10,13 +10,15 @@ import countryReducer from "./store/reducer/countryReducer";
 import errorReducer from "./store/reducer/errorReducer";
 import authReducer from "./store/reducer/authReducer";
 import commentReducer from "./store/reducer/commentReducer";
+import makepaymentReducer from './store/reducer/paymentReducer'
 
 
 const Rootreducer = combineReducers({
   countryReducer: countryReducer,
   errorReducer: errorReducer,
   authReducer: authReducer,
-  commentReducer: commentReducer
+  commentReducer: commentReducer,
+  makepaymentReducer: makepaymentReducer
 
 });
 

@@ -21,7 +21,6 @@ export const addcountry = (posts) => {
 }
 
 export const postCountryAsync = (item) => {
-    console.log("dddddddddddddddddd", item)
     return dispatch => {
         axios.post('http://localhost:5000/products',item)
             .then(response => {
@@ -30,3 +29,15 @@ export const postCountryAsync = (item) => {
     }
 }
 
+export const deletecountry = (posts) => {
+    return { type: actionType.DELETE_COUNTRY, payload: posts }
+}
+
+export const deleteCountryAsync = (item) => {
+    return dispatch => {
+        axios.delete(`http://localhost:5000/products/${item}`)
+            .then(response => {
+                dispatch(deletecountry(item))
+            })
+    }
+}

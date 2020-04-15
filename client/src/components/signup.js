@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
+import { Form, Input, Col, FormGroup, Button, La, Inputbel } from 'reactstrap';
+
 import PropTypes from "prop-types";
 import { signupUserAsync } from "../store/action/authAction";
-import {Alert} from 'reactstrap'
-import {clearError} from '../store/action/errorAction'
+import { Alert } from 'reactstrap'
+import { clearError } from '../store/action/errorAction'
+import styles from './signup.module.css'
 class Signup extends Component {
   state = {
     email: "",
@@ -12,7 +16,7 @@ class Signup extends Component {
     msg: null
   };
 
-//   this.props.clearError();
+  //   this.props.clearError();
 
   signupHandler = (e) => {
     e.preventDefault();
@@ -23,69 +27,78 @@ class Signup extends Component {
     };
 
     this.props.signupUserAsync(newUser);
+    // this.props.history.push({pathname:'/signin'})
   };
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    signupUserAsync:PropTypes.func.isRequired,
+    signupUserAsync: PropTypes.func.isRequired,
     clearError: PropTypes.func.isRequired
   };
 
-  componentDidUpdate(prevProps){
-      const {error, isAuthenticated} = this.props;
-      if(error !== prevProps.error){
-          if(error.id ==="SIGNUP_FAIL"){
-              this.setState({msg: error.msg.msg})
-          } else{
-              this.setState({msg:null})
-          }
+  componentDidUpdate(prevProps) {
+    const { error, isAuthenticated } = this.props;
+    if (error !== prevProps.error) {
+      if (error.id === "SIGNUP_FAIL") {
+        this.setState({ msg: error.msg.msg })
+      } else {
+        this.setState({ msg: error.msg.msg })
       }
+    }
 
-      // if(isAuthenticated){
-      //  return  <Alert>{"Registered sucessfully"}</Alert>
-     // }
+    // if(isAuthenticated){
+    //  return  <Alert>{"Registered sucessfully"}</Alert>
+    // }
 
   }
 
   render() {
     return (
-      <div>
-      {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert>:null}
-        <div className="container">
-          <label>Email</label>
-          <br></br>
-          <input
-            type="text"
-            value={this.state.email}
-            onChange={(event) => 
+      <div className={styles.Post}>
+        {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null}
 
-                this.setState({ 
-                email: event.target.value })}
-          />
-          <br></br>
+        <Form className="container" onSubmit={this.signupHandler}>
+          <Col sm={12}>
+            <label>Email</label>
+            <br></br>
 
-          <label>Password</label>
-          <br></br>
-          <input
-            type="text"
-            value={this.state.password}
-            onChange={(event) =>
-              this.setState({ password: event.target.value })
-            }
-          />
-          <br></br>
-          <label>Role</label>
-          <br></br>
-          <input
-            type="text"
-            value={this.state.role}
-            onChange={(event) => this.setState({ role: event.target.value })}
-          />
-          <br></br>
+            <Input
+              type="text"
+              value={this.state.email}
+              onChange={(event) =>
 
-          <button onClick={this.signupHandler}> Signup</button>
-        </div>
+                this.setState({
+                  email: event.target.value
+                })}
+            />
+
+
+            <label>Password</label> <br></br>
+
+            <Input
+              type="password"
+              value={this.state.password}
+              onChange={(event) =>
+                this.setState({ password: event.target.value })
+              }
+            />
+
+
+            <label>Role</label>
+
+            <Input
+              type="text"
+              value={this.state.role}
+              onChange={(event) => this.setState({ role: event.target.value })}
+            /><br />
+
+
+
+            <Button  color="primary" size="lg" > Signup</Button>
+          </Col>
+        </Form><br />
+        <p>If you already have please LogIn !!</p>
       </div>
     );
   }
