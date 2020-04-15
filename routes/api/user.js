@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/user", auth, userController.getUser);
 // router.get('/payment-page', userController.getPayment);
-// router.get('/order-history', userController.getOrders);
+router.post('/order', userController.postOrder);
 // router.post('/delete-history', userController.deleteHistory)
 
 module.exports = router;

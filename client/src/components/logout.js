@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from 'react-router-dom'
 import { logout } from '../store/action/authAction'
-import { Alert } from "reactstrap";
+import { Alert,Button } from "reactstrap";
+import styles from './logout.module.css'
 //import { withRouter } from "react-router";
 
 
@@ -27,10 +28,12 @@ class Logout extends Component {
 
 
     return (
-      <div className="container">
+      
+      <div className={styles.Post}>
         <Alert>Are sure you want log out ?</Alert>
-        <button onClick={this.logoutHandler}> Yes</button>
+        <Button onClick={this.logoutHandler}> Yes</Button>
       </div>
+      
     );
   }
 }

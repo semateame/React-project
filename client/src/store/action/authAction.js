@@ -101,3 +101,24 @@ export const commentUserAsync = (newComment) => {
            
   }
 }
+
+
+
+export const orderUser = (userData) => {
+  return { type: actionTypes.ORDER_ITEM, payload: userData }
+}
+
+export const orderUserAsync = (item) => {
+  return dispatch => {
+      axios.post('http://localhost:5000/order', item)
+          .then(response => {
+             console.log(response.data,"======")
+              dispatch(orderUser(response.data));
+          })
+
+           .catch(err=>{
+            dispatch(returnError(err.response.data, err.response.status));
+              
+           })
+  }
+}

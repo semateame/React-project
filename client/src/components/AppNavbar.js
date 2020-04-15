@@ -99,20 +99,7 @@ const AppNavbar = (props) => {
                     </Link>
                   </NavLink>
                 </DropdownItem>
-                <DropdownItem>
-                  <NavLink>
-                    {" "}
-                    <Link
-                      style={{
-                        color: "white",
-                        background: "rgb(58, 179, 201)",
-                      }}
-                      to="/addComments"
-                    >
-                      Add Feedback
-                    </Link>
-                  </NavLink>
-                </DropdownItem>
+                
                 <DropdownItem divider />
               </DropdownMenu>
             </UncontrolledDropdown>
