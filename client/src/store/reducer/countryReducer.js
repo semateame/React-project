@@ -24,6 +24,18 @@ const reducer = (state = initialState, action) => {
             posts: [action.payload, ...state.posts]
         }
     }
+
+    if (action.type === actionTypes.DELETE_COUNTRY) {
+
+
+        return {
+            ...state,
+            posts: state.posts.filter(item=>item._id!==action.payload)
+
+        }
+    }
+
+    
     return state;
 }
 

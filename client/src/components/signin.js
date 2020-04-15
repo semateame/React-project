@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {Alert} from 'reactstrap'
-import {clearError} from '../store/action/errorAction'
+import { Alert, Form, FormGroup, Input, Col } from 'reactstrap'
+import { clearError } from '../store/action/errorAction'
+import { withRouter } from 'react-router-dom'
 
 
 import { signinUserAsync } from '../store/action/authAction'
@@ -12,7 +13,7 @@ class Signin extends Component {
     state = {
         email: '',
         password: "",
-        msg:null
+        msg: null
     }
 
     signinHandler = (e) => {
@@ -28,24 +29,24 @@ class Signin extends Component {
     static propTypes = {
         isAuthenticated: PropTypes.bool,
         error: PropTypes.object.isRequired,
-        signinUserAsync:PropTypes.func.isRequired,
+        signinUserAsync: PropTypes.func.isRequired,
         clearError: PropTypes.func.isRequired
-      };
+    };
 
-      componentDidUpdate(prevProps){
-        const {error, isAuthenticated} = this.props;
-        if(error !== prevProps.error){
-            if(error.id ==="SIGNIN_FAIL"){
-                this.setState({msg: error.msg.msg})
-            } else{
-                this.setState({msg:null})
+    componentDidUpdate(prevProps) {
+        const { error, isAuthenticated } = this.props;
+        if (error !== prevProps.error) {
+            if (error.id === "SIGNIN_FAIL") {
+                this.setState({ msg: error.msg.msg })
+            } else {
+                this.setState({ msg: null })
             }
         }
-  
+
         // if(isAuthenticated){
         //  return  <Alert>{"Registered sucessfully"}</Alert>
-       // }
-  
+        // }
+
     }
 
 
@@ -56,21 +57,24 @@ class Signin extends Component {
 
         return (
             <div>
-            {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert>:null}
+                {this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null}
+                <Form onSubmit={this.signinHandler}>
+                    <Col sm={6}>
+                        <FormGroup>
+                            <label>Email</label><br></br>
+                            <Input type="email" value={this.state.email}
+                                onChange={(event) => this.setState({ email: event.target.value })} /><br></br>
+                        </FormGroup>
+                        <FormGroup>
+                            <label>Password</label><br></br>
+                            <Input type="password" value={this.state.password}
+                                onChange={(event) => this.setState({ password: event.target.value })} /><br></br>
+                        </FormGroup>
+                    </Col>
+                    <button type="submit" > Sign in</button>
 
-                <div className="container">
-                    <label>Email</label><br></br>
-                    <input type="email" value={this.state.email}
-                        onChange={(event) => this.setState({ email: event.target.value })} /><br></br>
-
-                    <label>Password</label><br></br>
-                    <input type="password" value={this.state.password}
-                        onChange={(event) => this.setState({ password: event.target.value })} /><br></br>
-                   
-
-                    <button onClick={this.signinHandler}> Sign in</button>
-                </div>
-            </div>
+                </Form>
+            </div >
         );
     }
 }
@@ -83,5 +87,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { signinUserAsync,clearError }
-)(Signin);
+    { signinUserAsync, clearError }
+)(withRouter(Signin));
