@@ -9,7 +9,7 @@ import Logout from "./logout";
 import { connect } from "react-redux";
 import addComment from "./addComments";
 import viewComment from "./viewComment";
-
+import homePage from './homePage'
 import {
   Collapse,
   Navbar,
@@ -99,20 +99,7 @@ const AppNavbar = (props) => {
                     </Link>
                   </NavLink>
                 </DropdownItem>
-                <DropdownItem>
-                  <NavLink>
-                    {" "}
-                    <Link
-                      style={{
-                        color: "white",
-                        background: "rgb(58, 179, 201)",
-                      }}
-                      to="/addComments"
-                    >
-                      Add Feedback
-                    </Link>
-                  </NavLink>
-                </DropdownItem>
+                
                 <DropdownItem divider />
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -151,6 +138,9 @@ const AppNavbar = (props) => {
       <Route path="/logout" exact component={Logout}></Route>
       <Route path="/addComments" exact component={addComment}></Route>
       <Route path="/viewComments" exact component={viewComment}></Route>
+      <Route path="/" exact component={homePage}></Route>
+     
+
     </div>
   );
 };

@@ -22,23 +22,20 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    banking: {
-        items: [
-            {
-                productId: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'Product',
-                    required: true
-                },
-                amount: { type: Number, required: true }
-            }
-        ],
-        totalprice: {
-            type: Number,
-
-        }
-    }
+    banking: []
 });
+
+
+
+userSchema.methods.addOrder = function(product,tp,re){
+  
+    let arr = [...this.banking]
+    arr.push(product)
+this.banking = arr
+
+    this.save()
+
+}
 
 
 

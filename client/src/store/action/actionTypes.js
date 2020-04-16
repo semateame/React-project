@@ -14,6 +14,8 @@ export const USER_COMMENT=' USER_COMMENT';
 export const GET_COMMENT=' GET_COMMENT';
 export const MAKE_PAYMENT = "MAKE_PAYMENT";
 export const DELETE_COUNTRY=' DELETE_COUNTRY';
+export const ORDER_ITEM=' ORDER_ITEM';
+
 
 
 

@@ -80,12 +80,12 @@ class Signin extends Component {
 }
 
 
-const mapStateToProps = state => ({
+const MapStateToProps = state => ({
     isAuthenticated: state.authReducer.isAuthenticated,
     error: state.errorReducer
 });
 
 export default connect(
-    mapStateToProps,
+    MapStateToProps,
     { signinUserAsync, clearError }
 )(withRouter(Signin));

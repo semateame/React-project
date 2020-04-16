@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   isAuthenticated: null,
   isLoading: false,
+  orderItems:null
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,6 +54,22 @@ const reducer = (state = initialState, action) => {
       isLoading: false,
     };
   }
+
+
+
+
+  if (action.type === actionTypes.ORDER_ITEM) {
+    return {
+      ...state,
+    orderItems: action.payload,
+    };
+  }
+
+
+
+
+
+
 
   return state;
 };
