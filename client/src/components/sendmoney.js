@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Input, Col, FormGroup, Button, Row, Label } from 'reactstrap';
 import { connect } from 'react-redux'
 import { withRouter ,Link} from 'react-router-dom'
-import Payment from "./payment/payment"
 import styles from './sendmoney.module.css'
 import {orderUserAsync} from '../store/action/authAction'
 
@@ -44,18 +43,7 @@ class Sendmoneyform extends React.Component {
 
 
 
-        let arr = []
-        if (this.state.loading) {
-            arr = this.state.method.map((item, index) => {
-                return (
-                    <Payment
-                        click={this.PostHandler}
-                        key={index}
-                        title={item}
-                    />
-                )
-            })
-        }
+     
 
         let country = this.props.posts ? this.props.posts.map(item => {
             return (

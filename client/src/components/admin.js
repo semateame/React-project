@@ -31,7 +31,6 @@ return (
                         <div key={country._id}> Rate :{country.rate}</div>
 
                         <span>
-                        <button class="btn btn-primary" type="submit">Edit </button>
                         <button class="btn btn-danger" type="submit" onClick={()=>{this.deleteCountry(country._id)}} >Delete </button>
     
                         </span>
