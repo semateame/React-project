@@ -2,12 +2,16 @@ import React from 'react';
 import { Form, Input, Col, FormGroup } from 'reactstrap';
 import * as actionTypes from '../store/action/countryAction'
 import { connect } from 'react-redux';
+import { deleteCountryAsync } from '../store/action/countryAction'
 
 
 class AdminForm extends React.Component{
- // console.log(props.comments)
- componentDidMount() {
-    this.props.onFetchPostsAsyn()
+
+   
+
+    
+ deleteCountry=(id)=>{
+ this.props.deleteCountryAsync(id);
 }
 render(){
 return (
@@ -27,8 +31,7 @@ return (
                         <div key={country._id}> Rate :{country.rate}</div>
 
                         <span>
-                        <button class="btn btn-primary" type="submit">Edit </button>
-                        <button class="btn btn-danger" type="submit">Delete </button>
+                        <button class="btn btn-danger" type="submit" onClick={()=>{this.deleteCountry(country._id)}} >Delete </button>
     
                         </span>
 
@@ -55,12 +58,7 @@ return {
 }
 }
 
-const mapDispatchToProps = dispatch => {
-return {
-
-    onFetchPostsAsyn: () => dispatch(actionTypes.fetchPostAsync())
-}
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminForm);
+
+export default connect(mapStateToProps, {deleteCountryAsync})(AdminForm);

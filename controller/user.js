@@ -13,3 +13,14 @@ exports.getUser = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+
+exports.postOrder = async (req, res, next) => {
+ let user= await User.findOne({email:req.body.email})
+ let country= await Product.findOne({country:req.body.country})
+  let totalPrice =  country.price + parseInt(req.body.amount)
+  let  recevice = parseInt( req.body.amount) * country.rate
+
+  user.addOrder(country)
+  res.status(200).send(country)
+
+};

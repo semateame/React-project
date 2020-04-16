@@ -1,0 +1,16 @@
+.Post {
+    width: 650px;
+    padding: 16px;
+    text-align: center;
+    border: 2px solid #eee;
+    box-shadow: 3px 2px 3px #ccc;
+    margin: auto;
+     position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: rgba(197, 204, 211, 0.404);
+}
+.Send{
+    padding: px;
+    margin-left: inherit;
+}
